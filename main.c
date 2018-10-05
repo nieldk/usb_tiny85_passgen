@@ -21,10 +21,10 @@
 #define SEND_ENTER 1 // define to 1 if you want to send ENTER after password
 
 const PROGMEM uchar measuring_message[] = "Starting generation...";
-const PROGMEM uchar finish_message[] = " New password saved.";
+const PROGMEM uchar finish_message[] = "...New password saved.";
 
 // The buffer needs to accommodate the messages above and the password
-#define MSG_BUFFER_SIZE 32 
+#define MSG_BUFFER_SIZE 38
 
 EEMEM uchar stored_password[MSG_BUFFER_SIZE];
 
