@@ -17,8 +17,8 @@
 // *** BASIC PROGRAM DEFINITIONS ***
 // *********************************
 
-#define PASS_LENGTH 10 // password length for generated password
-#define SEND_ENTER 0 // define to 1 if you want to send ENTER after password
+#define PASS_LENGTH 16 // password length for generated password
+#define SEND_ENTER 1 // define to 1 if you want to send ENTER after password
 
 const PROGMEM uchar measuring_message[] = "Starting generation...";
 const PROGMEM uchar finish_message[] = " New password saved.";
