@@ -17,11 +17,11 @@
 /* This is the port where the USB bus is connected. When you configure it to
  * "B", the registers PORTB, PINB and DDRB will be used.
  */
-#define USB_CFG_DMINUS_BIT      1
+#define USB_CFG_DMINUS_BIT      3
 /* This is the bit number in USB_CFG_IOPORT where the USB D- line is connected.
  * This may be any bit in the port.
  */
-#define USB_CFG_DPLUS_BIT       2
+#define USB_CFG_DPLUS_BIT       4
 /* This is the bit number in USB_CFG_IOPORT where the USB D+ line is connected.
  * This may be any bit in the port. Please note that D+ must also be connected
  * to interrupt pin INT0!
@@ -171,7 +171,7 @@ extern void hadUsbReset(void);
 /* See USB specification if you want to conform to an existing device class or
  * protocol.
  */
-#define USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH    35  /* total length of report descriptor */
+#define USB_CFG_HID_REPORT_DESCRIPTOR_LENGTH    63  /* total length of report descriptor */
 /* Define this to the length of the HID report descriptor, if you implement
  * an HID device. Otherwise don't define it or define it to 0.
  * Since this template defines a HID device, it must also specify a HID
@@ -257,3 +257,12 @@ extern void hadUsbReset(void);
 /* #define USB_INTR_PENDING_BIT    INTF0 */
 
 #endif /* __usbconfig_h_included__ */
+
+#define USB_INTR_CFG PCMSK
+#define USB_INTR_CFG_SET (1 << USB_CFG_DPLUS_BIT)
+#define USB_INTR_CFG_CLR 0
+#define USB_INTR_ENABLE GIMSK
+#define USB_INTR_ENABLE_BIT PCIE
+#define USB_INTR_PENDING GIFR
+#define USB_INTR_PENDING_BIT PCIF
+#define USB_INTR_VECTOR PCINT0_vect

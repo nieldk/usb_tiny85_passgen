@@ -27,11 +27,11 @@ section at the end of this file).
 /* This is the port where the USB bus is connected. When you configure it to
  * "B", the registers PORTB, PINB and DDRB will be used.
  */
-#define USB_CFG_DMINUS_BIT      0
+#define USB_CFG_DMINUS_BIT      3
 /* This is the bit number in USB_CFG_IOPORT where the USB D- line is connected.
  * This may be any bit in the port.
  */
-#define USB_CFG_DPLUS_BIT       2
+#define USB_CFG_DPLUS_BIT       4
 /* This is the bit number in USB_CFG_IOPORT where the USB D+ line is connected.
  * This may be any bit in the port. Please note that D+ must also be connected
  * to interrupt pin INT0! [You can also use other interrupts, see section
@@ -219,7 +219,7 @@ extern void hadUsbReset(void); // define the function for usbdrv.c
 
 /* -------------------------- Device Description --------------------------- */
 
-#define  USB_CFG_VENDOR_ID       0x42, 0x42
+#define  USB_CFG_VENDOR_ID       0xc0, 0x16
 /* USB vendor ID for the device, low byte first. If you have registered your
  * own Vendor ID, define it here. Otherwise you may use one of obdev's free
  * shared VID/PID pairs. Be sure to read USB-IDs-for-free.txt for rules!
@@ -228,7 +228,7 @@ extern void hadUsbReset(void); // define the function for usbdrv.c
  * with libusb: 0x16c0/0x5dc.  Use this VID/PID pair ONLY if you understand
  * the implications!
  */
-#define  USB_CFG_DEVICE_ID       0x31, 0xe1
+#define  USB_CFG_DEVICE_ID       0xdb, 0x27
 /* This is the ID of the product, low byte first. It is interpreted in the
  * scope of the vendor ID. If you have registered your own VID with usb.org
  * or if you have licensed a PID from somebody else, define it here. Otherwise
@@ -242,9 +242,9 @@ extern void hadUsbReset(void); // define the function for usbdrv.c
 #define USB_CFG_DEVICE_VERSION  0x00, 0x01
 /* Version number of the device: Minor number first, then major number.
  */
-#define USB_CFG_VENDOR_NAME     'c', 'o', 'd', 'e', 'a', 'n', 'd', 'l', \
-								'i', 'f', 'e', '.', 'c', 'o', 'm'
-#define USB_CFG_VENDOR_NAME_LEN 15
+#define USB_CFG_VENDOR_NAME     'S', 'e', 'c', '1', ' ', 'S', 'e', 'c', \
+								'u', 'r', 'i', 't', 'y'
+#define USB_CFG_VENDOR_NAME_LEN 13
 /* These two values define the vendor name returned by the USB device. The name
  * must be given as a list of characters under single quotes. The characters
  * are interpreted as Unicode (UTF-16) entities.
@@ -253,14 +253,14 @@ extern void hadUsbReset(void); // define the function for usbdrv.c
  * obdev's free shared VID/PID pair. See the file USB-IDs-for-free.txt for
  * details.
  */
-#define USB_CFG_DEVICE_NAME     'P', 'a', 's', 's', 'g', 'e', 'n'
-#define USB_CFG_DEVICE_NAME_LEN 7
+#define USB_CFG_DEVICE_NAME     'P', 'a', 's', 's', 'w', 'o', 'r', 'G', 'e', 'n', 'e', 'r', 'a', 't', 'o', 'r'
+#define USB_CFG_DEVICE_NAME_LEN 16
 /* Same as above for the device name. If you don't want a device name, undefine
  * the macros. See the file USB-IDs-for-free.txt before you assign a name if
  * you use a shared VID/PID.
  */
-/*#define USB_CFG_SERIAL_NUMBER   'N', 'o', 'n', 'e' */
-/*#define USB_CFG_SERIAL_NUMBER_LEN   0 */
+#define USB_CFG_SERIAL_NUMBER   '0', '0', '0', '1'
+#define USB_CFG_SERIAL_NUMBER_LEN   4
 /* Same as above for the serial number. If you don't want a serial number,
  * undefine the macros.
  * It may be useful to provide the serial number through other means than at
@@ -375,3 +375,12 @@ extern void hadUsbReset(void); // define the function for usbdrv.c
 /* #define USB_INTR_VECTOR         INT0_vect */
 
 #endif /* __usbconfig_h_included__ */
+
+#define USB_INTR_CFG PCMSK
+#define USB_INTR_CFG_SET (1 << USB_CFG_DPLUS_BIT)
+#define USB_INTR_CFG_CLR 0
+#define USB_INTR_ENABLE GIMSK
+#define USB_INTR_ENABLE_BIT PCIE
+#define USB_INTR_PENDING GIFR
+#define USB_INTR_PENDING_BIT PCIF
+#define USB_INTR_VECTOR PCINT0_vect
