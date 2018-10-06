@@ -303,7 +303,7 @@ int main() {
     usbInit();
 	
     usbDeviceDisconnect(); // enforce re-enumeration
-    for(i = 0; i<250; i++) { // wait 500 ms
+    for(i = 0; i<50; i++) { // wait 100 ms
         wdt_reset(); // keep the watchdog happy
         _delay_ms(2);
     }
